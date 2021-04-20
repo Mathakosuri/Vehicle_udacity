@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @RequestMapping("/login?logout")
     public String logoutPage(Model model){
-	System.out.println("logout method");
 	String lougoutSuccess = null;
 	model.addAttribute("lougoutSuccess", true);
 	System.out.println(model.getAttribute(lougoutSuccess));

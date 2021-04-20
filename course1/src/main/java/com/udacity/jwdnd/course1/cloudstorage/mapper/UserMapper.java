@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
 
 
+
 @Mapper
 public interface UserMapper {
 

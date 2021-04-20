@@ -1,4 +1,4 @@
-package com.udacity.jwdnd.course1.cloudstorage.services;
+ package com.udacity.jwdnd.course1.cloudstorage.services;
 
 import java.security.SecureRandom;
 import java.util.Base64;

@@ -1,5 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.model;
 
+
 public class User {
 	public String getSalt() {
 		return salt;

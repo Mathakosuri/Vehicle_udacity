@@ -2,6 +2,7 @@ package com.udacity.jwdnd.course1.cloudstorage.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 public class Note {
   
 

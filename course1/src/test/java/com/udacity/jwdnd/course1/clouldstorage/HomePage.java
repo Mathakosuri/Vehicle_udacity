@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
-public class HomePage {
+ public class HomePage {
   
     @FindBy(id = "logout")
     private WebElement logoutButton;
