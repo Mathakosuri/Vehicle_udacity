@@ -1,4 +1,4 @@
- package com.udacity.jwdnd.course1.clouldstorage;
+ package com.udacity.jwdnd.course1.cloudstorage;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

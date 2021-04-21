@@ -1,4 +1,4 @@
- package com.udacity.jwdnd.course1.clouldstorage;
+ package com.udacity.jwdnd.course1.cloudstorage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
