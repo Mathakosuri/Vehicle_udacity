@@ -167,13 +167,15 @@ import org.openqa.selenium.JavascriptExecutor;
     
     
     public List getCredentialtableDetails() {
-      //  return noteTitleText.getAttribute("innerHTML");
+    	  WebDriverWait wait_modal = new WebDriverWait(driver, 10);
+    	
     	int rowcount= driver.findElements(By.xpath("//*[@id=\"credentialTable\"]/tbody/tr")).size();
     	int columncount = driver.findElements(By.xpath("//*[@id=\"credentialTable\"]/tbody/tr[2]/*")).size();
     	List<String> details = new ArrayList();
     	for (int i=2;i<=rowcount;i++) {
     		for(int j=2;j<=columncount;j++) {
-    		details.add(driver.findElement(By.xpath("//*[@id=\"credentialTable\"]/tbody/tr["+i+"]/td["+j+"]")).getText());
+               String credentialvalue = wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id=\"credentialTable\"]/tbody/tr["+i+"]/td["+j+"]")))).getText();
+                details.add(credentialvalue);
     		}
     	}
 		return details;

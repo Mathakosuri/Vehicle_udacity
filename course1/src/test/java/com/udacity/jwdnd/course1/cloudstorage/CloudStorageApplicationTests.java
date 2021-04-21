@@ -205,11 +205,13 @@ class CloudStorageApplicationTests {
 	      
 	       
 	        List<String> details = homePage.getCredentialtableDetails();
-	       
+	        
+	        System.out.println(details.get(0));
+	        System.out.println(details.get(1));
 	        Assertions.assertEquals("example.gmail", details.get(0));
     	    Assertions.assertEquals("user1", details.get(1));
     		
-				Assertions.assertEquals("user123", getDecryptedText(details.get(2)));
+		    Assertions.assertEquals("user123", getDecryptedText(details.get(2)));
 			
 		
 	}
