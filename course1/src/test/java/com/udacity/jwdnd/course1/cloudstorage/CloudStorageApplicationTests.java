@@ -114,7 +114,7 @@ class CloudStorageApplicationTests {
 	}
 	
 	@Test
-	  public void createNote() {
+	  public void testAddNote() {
         driver.get("http://localhost:" + this.port + "/signup");
         SignupPage signUpPage = new SignupPage(driver);
         signUpPage.signup("mm","mm123","matha","kosuri");
@@ -136,7 +136,7 @@ class CloudStorageApplicationTests {
 	
 	
 	@Test
-	public void deleteNote() {
+	public void testDeleteNote() {
 	      driver.get("http://localhost:" + this.port + "/signup");
 	        SignupPage signUpPage = new SignupPage(driver);
 	        signUpPage.signup("mm","mm123","matha","kosuri");
@@ -160,7 +160,7 @@ class CloudStorageApplicationTests {
 	}
 	
 	@Test
-	public void editNote() {
+	public void testEditNote() {
 	      driver.get("http://localhost:" + this.port + "/signup");
 	        SignupPage signUpPage = new SignupPage(driver);
 	        signUpPage.signup("mm","mm123","matha","kosuri");
@@ -187,7 +187,7 @@ class CloudStorageApplicationTests {
 	
 	
 	@Test
-	public void addCredential() throws Exception {
+	public void testAddCredential() throws Exception {
 		   driver.get("http://localhost:" + this.port + "/signup");
 	        SignupPage signUpPage = new SignupPage(driver);
 	        signUpPage.signup("mm","mm123","matha","kosuri");
@@ -206,10 +206,10 @@ class CloudStorageApplicationTests {
 	       
 	        List<String> details = homePage.getCredentialUrl();
 	       
-	        Assertions.assertEquals("devi.kosuri", details.get(0));
-    	    Assertions.assertEquals("matha", details.get(1));
+	        Assertions.assertEquals("example.gmail", details.get(0));
+    	    Assertions.assertEquals("user1", details.get(1));
     		
-				Assertions.assertEquals("surya007", getDecryptedText(details.get(2)));
+				Assertions.assertEquals("user123", getDecryptedText(details.get(2)));
 			
 		
 	}

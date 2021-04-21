@@ -161,9 +161,9 @@ import org.openqa.selenium.JavascriptExecutor;
         wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("credential-url"))));
         wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("credential-username"))));
         wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("credential-password"))));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "devi.kosuri" + "';", driver.findElement(By.id("credential-url")));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "matha" + "';", driver.findElement(By.id("credential-username")));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "surya007" + "';", driver.findElement(By.id("credential-password")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "example.gmail" + "';", driver.findElement(By.id("credential-url")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "user1" + "';", driver.findElement(By.id("credential-username")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "user123" + "';", driver.findElement(By.id("credential-password")));
 
         //waitForVisibility(saveNoteButton);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", credentialsubmitBtn);
