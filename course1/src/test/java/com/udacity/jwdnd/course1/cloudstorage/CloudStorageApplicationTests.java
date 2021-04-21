@@ -204,7 +204,7 @@ class CloudStorageApplicationTests {
 	        homePage.clickCredentialTab();
 	      
 	       
-	        List<String> details = homePage.getCredentialUrl();
+	        List<String> details = homePage.getCredentialtableDetails();
 	       
 	        Assertions.assertEquals("example.gmail", details.get(0));
     	    Assertions.assertEquals("user1", details.get(1));

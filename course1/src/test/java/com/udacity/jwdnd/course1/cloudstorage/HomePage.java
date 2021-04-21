@@ -85,9 +85,7 @@ import org.openqa.selenium.JavascriptExecutor;
     	waitForVisibility(noteTab);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", noteTab);
     	WebDriverWait wait = new WebDriverWait(driver, 200);
-        
-      //  wait.until(ExpectedConditions.elementToBeClickable(addNoteBtn));
-    	waitForVisibility(addNoteBtn);
+         waitForVisibility(addNoteBtn);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();",addNoteBtn );
 
         WebDriverWait wait_modal = new WebDriverWait(driver, 10);
@@ -149,7 +147,7 @@ import org.openqa.selenium.JavascriptExecutor;
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", credentialTab);
     	WebDriverWait wait = new WebDriverWait(driver, 200);
         
-      //  wait.until(ExpectedConditions.elementToBeClickable(addNoteBtn));
+      
     	waitForVisibility(addCredentailBtn);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();",addCredentailBtn );
 
@@ -164,13 +162,11 @@ import org.openqa.selenium.JavascriptExecutor;
         ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "example.gmail" + "';", driver.findElement(By.id("credential-url")));
         ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "user1" + "';", driver.findElement(By.id("credential-username")));
         ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "user123" + "';", driver.findElement(By.id("credential-password")));
-
-        //waitForVisibility(saveNoteButton);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", credentialsubmitBtn);
+         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", credentialsubmitBtn);
         }
     
     
-    public List getCredentialUrl() {
+    public List getCredentialtableDetails() {
       //  return noteTitleText.getAttribute("innerHTML");
     	int rowcount= driver.findElements(By.xpath("//*[@id=\"credentialTable\"]/tbody/tr")).size();
     	int columncount = driver.findElements(By.xpath("//*[@id=\"credentialTable\"]/tbody/tr[2]/*")).size();
@@ -184,6 +180,6 @@ import org.openqa.selenium.JavascriptExecutor;
 		}
    
     public String getCredentialUserName() {
-        return noteDescription.getText();
+        return credentialusername.getText();
     }
 }
