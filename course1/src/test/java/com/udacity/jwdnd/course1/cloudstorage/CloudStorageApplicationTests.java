@@ -217,7 +217,7 @@ class CloudStorageApplicationTests {
 	}
 	
 	private String getDecryptedText(String encryptedPassword) throws Exception {
-		User user = userService.getUser("mm");
+		User user = userService.getUser("matha");
 		Credential credential = credentialsService.getUserCredentials(user.getUserId()).get(0);
 		return encryptionService.decryptValue(encryptedPassword, credential.getKey());
 	}
