@@ -10,6 +10,10 @@ public class ResultPage {
 	// fields:
     @FindBy(tagName = "a")
     private WebElement backHomeLink;
+    @FindBy(xpath = "/html/body/div/div/h1")
+    private WebElement resultSuccess;
+    
+    
     private final WebDriver driver;
     // constructor:
     public ResultPage(WebDriver driver) {
@@ -19,5 +23,10 @@ public class ResultPage {
     // methods:
     public void clickHereBtn() {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.backHomeLink);
+    }
+    
+    public String resultStatus() {
+    	System.out.println(resultSuccess.getText());
+    	return resultSuccess.getText();
     }
 }

@@ -84,7 +84,7 @@
                                             <a th:href="@{'/deletenote/' + ${note.getNoteId()}}" id="delete-btn-note" class="btn btn-danger">Delete</a>
                                         </td>
                                         <td  th:text="${note.getNoteTitle()}" id="note-title-text" scope="row">Example Note Title</td>
-                                        <td th:text="${note.getNoteDescription()}" > Example Note Description </td>
+                                        <td th:text="${note.getNoteDescription()}" id="note-title-desc" > Example Note Description </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -145,9 +145,9 @@
                                            >Edit</button>
                                             <a th:href="@{'/deletecredential/' + ${credential.getCredentialid()}}" id="delete-credential-btn" class="btn btn-danger">Delete</a>
                                         </td>
-                                        <td th:text="${credential.getUrl()}"  scope="row">Example Credential URL</td>
-                                        <td th:text="${credential.getUsername()}" >Example Credential Username</td>
-                                        <td th:text="${credential.getPassword()}" > Example Credential Passwordon </td>
+                                        <td th:text="${credential.getUrl()}" id="credential-url" scope="row">Example Credential URL</td>
+                                        <td th:text="${credential.getUsername()}"  id="credential-username">Example Credential Username</td>
+                                        <td th:text="${credential.getPassword()}"  id="credential-password"> Example Credential Passwordon </td>
                                     </tr>
                                     
                                 </tbody>

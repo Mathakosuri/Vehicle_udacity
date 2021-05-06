@@ -46,13 +46,12 @@ public class CredentialController {
 	      int userId = userService.getUser(username).getUserId();
 	     credential.setUserid(userId);
 	     String password = credential.getPassword(); //get password from credential form
-	        // <start> encrypt the password
 	        SecureRandom random = new SecureRandom();
 	        byte[] key = new byte[16];
 	        random.nextBytes(key);
 	        String encodedKey = Base64.getEncoder().encodeToString(key);
 	        String encryptedPassword = encryptionService.encryptValue(password, encodedKey);
-	        // <end> encrypt the password
+	       
 	        credential.setPassword(encryptedPassword);
 	        credential.setKey(encodedKey);
 	     if (credential.getCredentialid().intValue() > 0) {

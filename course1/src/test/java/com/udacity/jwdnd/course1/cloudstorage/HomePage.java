@@ -69,6 +69,14 @@ import org.openqa.selenium.JavascriptExecutor;
     private WebElement editcredentialBtn;
     @FindBy(id = "delete-credential-btn")
     private WebElement deletecredentailBtn;
+     @FindBy(id = "credential-url")
+    private WebElement credentialUrl;
+    @FindBy(id = "credential-username")
+    private WebElement credentialUserName;
+    @FindBy(id = "credential-password")
+    private WebElement credentialPassword;
+
+
     
     // constructor:
     public HomePage(WebDriver driver) {
@@ -78,6 +86,7 @@ import org.openqa.selenium.JavascriptExecutor;
     // METHOD FOR NOTES:
     // method to simulate user to click on Notes tab:
     public void clickNoteTab() {
+         
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.noteTab);
     }
         public void createNote(){
@@ -120,18 +129,47 @@ import org.openqa.selenium.JavascriptExecutor;
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", deleteNoteBtn);
 		
 	}
+	
+	public void deleteCredential(){
+		
+		System.out.println("the delete credential");
+		WebDriverWait wait = new WebDriverWait(driver, 40);
+		waitForVisibility(deletecredentailBtn);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", deletecredentailBtn);
+		
+	}
+	
     // verify that new note title is created:
-    public String getNoteTitleText() {
-    	return driver.findElement(By.id("note-title-text")).getText();
-    	 
+        public String getNoteTitleText() {
+          WebDriverWait wait_modal = new WebDriverWait(driver, 200);
+          String  noteTitle=  wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("note-title-text")))).getText();
+              System.out.println(noteTitle);
+    	  return  noteTitle;
     }
     // verify that new note description is created:
     public String getNoteDescriptionText() {
-        return noteDescription.getText();
+       WebDriverWait wait_modal = new WebDriverWait(driver, 40);
+       String notedesc= wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("note-title-desc")))).getText();
+        System.out.println(notedesc);
+        return notedesc;
     }
     
+    //verify the credential is created
+    public String getCredentialUrl() {
+        WebDriverWait wait_modal = new WebDriverWait(driver, 200);
+        String  credentialUrl=  wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("credential-url")))).getText();
+            System.out.println(credentialUrl);
+  	  return  credentialUrl;
+  }
+    public String getCredentialUsername() {
+        WebDriverWait wait_modal = new WebDriverWait(driver, 200);
+        String  noteTitle=  wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("note-title-text")))).getText();
+            System.out.println(noteTitle);
+  	  return  noteTitle;
+  }
+    
     private void waitForVisibility(WebElement element) throws Error {
-        new WebDriverWait(driver, 40)
+        new WebDriverWait(driver, 200)
                 .until(ExpectedConditions.visibilityOf(element));
     }
     
@@ -180,6 +218,12 @@ import org.openqa.selenium.JavascriptExecutor;
     	}
 		return details;
 		}
+		
+		
+	    public void submitLogout() {
+	          WebDriverWait wait_modal = new WebDriverWait(driver, 40);
+	          wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("logoutbutton")))).submit();
+	    }
    
     public String getCredentialUserName() {
         return credentialusername.getText();

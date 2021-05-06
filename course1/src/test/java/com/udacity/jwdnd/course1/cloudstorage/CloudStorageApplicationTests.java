@@ -37,8 +37,8 @@ class CloudStorageApplicationTests {
 
 	@LocalServerPort
 	private int port;
-
-	private WebDriver driver;
+    private WebDriver driver;
+    public String baseURL;
 
 	@BeforeAll
 	static void beforeAll() {
@@ -48,6 +48,7 @@ class CloudStorageApplicationTests {
 	@BeforeEach
 	public void beforeEach() {
 		this.driver = new ChromeDriver();
+		baseURL = "http://localhost:" + this.port;
 	}
 
 	@AfterEach
@@ -59,19 +60,19 @@ class CloudStorageApplicationTests {
 
 	@Test
 	public void getLoginPage() {
-		driver.get("http://localhost:" + this.port + "/login");
+		driver.get(baseURL + "/login");
 		Assertions.assertEquals("Login", driver.getTitle());
 	}
 	
 	@Test
 	public void testUnauthorizedUserAccess(){
-		driver.get("http://localhost:" + this.port +"/home");
+		driver.get(baseURL +"/home");
 		Assertions.assertEquals("Login",driver.getTitle());
-		driver.get("http://localhost:" + this.port +"/uploadFile");
+		driver.get(baseURL+"/uploadFile");
 		Assertions.assertEquals("Login",driver.getTitle());
-		driver.get("http://localhost:" + this.port +"/credential");
+		driver.get(baseURL +"/credential");
 		Assertions.assertEquals("Login",driver.getTitle());
-		driver.get("http://localhost:" + this.port +"/note");
+		driver.get(baseURL +"/note");
 		Assertions.assertEquals("Login",driver.getTitle());
 	}
 	@Test
@@ -80,55 +81,41 @@ class CloudStorageApplicationTests {
 		String password = "mm123";
 		String firstname = "kosuri";
 		String lastname = "matha";
-		driver.get("http://localhost:" + this.port+"/signup");
+		driver.get(baseURL+"/signup");
 		SignupPage signupPage = new SignupPage(driver);
 		signupPage.signup(firstname,lastname,username,password);
-		Assertions.assertEquals("You successfully signed up! Please continue to the login page.",driver.findElement(By.id("success-msg")).getText());
-		driver.get("http://localhost:" + this.port+"/login");
+		signupPage.getsignupSuccessText();
+		Assertions.assertEquals("You successfully signed up! Please continue to the login page.",signupPage.getsignupSuccessText());
+		driver.get(baseURL+"/login");
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.login(username,password);
 		Assertions.assertEquals("Home",driver.getTitle());
 		driver.findElement(By.id("logoutbutton")).submit();
-		Thread.sleep(5000);
 		Assertions.assertNotEquals("Home",driver.getTitle());
-		driver.get("http://localhost:" + this.port+"/home");
-		Thread.sleep(3000);
+		driver.get(baseURL+"/home");
 		Assertions.assertNotEquals("Home",driver.getTitle());
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
 	}
 	
-	@Test
-	public void testLogin()throws InterruptedException{
-		String username = "mm";
-		String password = "mm123";
-		String firstname = "kosuri";
-		String lastname = "matha";
-		driver.get("http://localhost:" + this.port+"/signup");
-		SignupPage signupPage = new SignupPage(driver);
-		signupPage.signup(firstname,lastname,username,password);
-		Assertions.assertEquals("You successfully signed up! Please continue to the login page.",driver.findElement(By.id("success-msg")).getText());
-		driver.get("http://localhost:" + this.port+"/login");
-		LoginPage loginPage = new LoginPage(driver);
-		loginPage.login(username,password);
-		Assertions.assertEquals("Home",driver.getTitle());
-	}
+
 	
 	@Test
 	  public void testAddNote() {
-        driver.get("http://localhost:" + this.port + "/signup");
-        SignupPage signUpPage = new SignupPage(driver);
-        signUpPage.signup("mm","mm123","matha","kosuri");
-
-
-        driver.get("http://localhost:" + this.port + "/login");
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("matha", "kosuri");
-
-        driver.get("http://localhost:" + this.port + "/home");
+		userSignUpLoginProcess();
+        driver.get(baseURL + "/home");
         HomePage homePage = new HomePage(driver);
+      //  homePage.clickNoteTab();
         homePage.createNote();
-        driver.get("http://localhost:" + this.port + "/home");
+        ResultPage resultPage = new ResultPage(driver);
+		resultPage.clickHereBtn();
         homePage.clickNoteTab();
+        Assertions.assertEquals("test", homePage.getNoteTitleText());
+        Assertions.assertEquals("testdescription", homePage.getNoteDescriptionText());
+        homePage.deleteNote();
+        driver.findElement(By.id("logoutbutton")).submit();
+     
+	   
+        
         
 
      //   Assertions.assertEquals(true, homePage.isNoteCreated());
@@ -137,19 +124,11 @@ class CloudStorageApplicationTests {
 	
 	@Test
 	public void testDeleteNote() {
-	      driver.get("http://localhost:" + this.port + "/signup");
-	        SignupPage signUpPage = new SignupPage(driver);
-	        signUpPage.signup("mm","mm123","matha","kosuri");
-
-
-	        driver.get("http://localhost:" + this.port + "/login");
-	        LoginPage loginPage = new LoginPage(driver);
-	        loginPage.login("matha", "kosuri");
-
-	        driver.get("http://localhost:" + this.port + "/home");
+		    userSignUpLoginProcess(); 
+		    driver.get(baseURL + "/home");
 	        HomePage homePage = new HomePage(driver);
 	        homePage.createNote();
-	        driver.get("http://localhost:" + this.port + "/home");
+	        driver.get(baseURL + "/home");
 	        homePage.clickNoteTab();
 	        homePage.deleteNote();
 	        Assertions.assertThrows(NoSuchElementException.class, ()->{
@@ -161,26 +140,26 @@ class CloudStorageApplicationTests {
 	
 	@Test
 	public void testEditNote() {
-	      driver.get("http://localhost:" + this.port + "/signup");
-	        SignupPage signUpPage = new SignupPage(driver);
-	        signUpPage.signup("mm","mm123","matha","kosuri");
+		    userSignUpLoginProcess();
 
-
-	        driver.get("http://localhost:" + this.port + "/login");
-	        LoginPage loginPage = new LoginPage(driver);
-	        loginPage.login("matha", "kosuri");
-
-	        driver.get("http://localhost:" + this.port + "/home");
+	        driver.get(baseURL + "/home");
 	        HomePage homePage = new HomePage(driver);
 	        homePage.createNote();
-	        driver.get("http://localhost:" + this.port + "/home");
+	        driver.get(baseURL + "/home");
 	        homePage.clickNoteTab();
 	        homePage.editNote();
-	        driver.get("http://localhost:" + this.port + "/home");
+	        ResultPage resultPage = new ResultPage(driver);
+	        Assertions.assertEquals("Success", resultPage.resultStatus());
+			resultPage.clickHereBtn(); // Redirects to home page
+	        
 	        homePage.clickNoteTab();
-	        String noteTitleText= homePage.getNoteTitleText();
-	        System.out.println("the edited note text is"+noteTitleText);
 	        Assertions.assertEquals("edittest", homePage.getNoteTitleText());
+	        Assertions.assertEquals("edittestdescription", homePage.getNoteDescriptionText());
+	        homePage.deleteNote();
+	        driver.findElement(By.id("logoutbutton")).submit();
+	        
+	       // homePage.submitLogout();
+	       // driver.get(baseURL+"/login");
 	        
 	       
 	}
@@ -188,31 +167,40 @@ class CloudStorageApplicationTests {
 	
 	@Test
 	public void testAddCredential() throws Exception {
-		   driver.get("http://localhost:" + this.port + "/signup");
-	        SignupPage signUpPage = new SignupPage(driver);
-	        signUpPage.signup("mm","mm123","matha","kosuri");
+		    userSignUpLoginProcess();
 
-
-	        driver.get("http://localhost:" + this.port + "/login");
-	        LoginPage loginPage = new LoginPage(driver);
-	        loginPage.login("matha", "kosuri");
-
-	        driver.get("http://localhost:" + this.port + "/home");
+	        driver.get(baseURL + "/home");
 	        HomePage homePage = new HomePage(driver);
 	        homePage.createCredential();
-	        driver.get("http://localhost:" + this.port + "/home");
+	        ResultPage resultPage = new ResultPage(driver);
+			resultPage.clickHereBtn();
 	        homePage.clickCredentialTab();
 	      
 	       
 	        List<String> details = homePage.getCredentialtableDetails();
-	        
-	        System.out.println(details.get(0));
-	        System.out.println(details.get(1));
-	        Assertions.assertEquals("example.gmail", details.get(0));
+	         Assertions.assertEquals("example.gmail", details.get(0));
     	    Assertions.assertEquals("user1", details.get(1));
-    		
-		    Assertions.assertEquals("user123", getDecryptedText(details.get(2)));
-			
+    	    Assertions.assertEquals("user123", getDecryptedText(details.get(2)));
+		}
+	
+	
+	
+	@Test
+	public void testDeleteCredential() {
+		  userSignUpLoginProcess();
+
+		  driver.get(baseURL + "/home");
+	        HomePage homePage = new HomePage(driver);
+	        homePage.createCredential();
+	        ResultPage resultPage = new ResultPage(driver);
+			resultPage.clickHereBtn();
+	        homePage.clickCredentialTab();
+	        homePage.deleteCredential();
+	        Assertions.assertThrows(Exception.class, ()->{
+	        	homePage.getCredentialUrl();
+	        	
+	        });
+	   
 		
 	}
 	
@@ -222,7 +210,17 @@ class CloudStorageApplicationTests {
 		return encryptionService.decryptValue(encryptedPassword, credential.getKey());
 	}
 	
-	
+	private void userSignUpLoginProcess() {
+		
+		 driver.get(baseURL + "/signup");
+	        SignupPage signUpPage = new SignupPage(driver);
+	        signUpPage.signup("mm","mm123","matha","kosuri"); 
+
+
+	        driver.get(baseURL + "/login");
+	        LoginPage loginPage = new LoginPage(driver);
+	        loginPage.login("matha", "kosuri");
+	}
 	
 }
 	
