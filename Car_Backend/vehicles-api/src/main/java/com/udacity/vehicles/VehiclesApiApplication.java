@@ -16,8 +16,6 @@ import org.springframework.web.reactive.function.client.WebClient;
  * initializes the car manufacturers in the database,
  * and launches web clients to communicate with maps and pricing.
  */
-
-
 @SpringBootApplication
 @EnableJpaAuditing
 public class VehiclesApiApplication {
