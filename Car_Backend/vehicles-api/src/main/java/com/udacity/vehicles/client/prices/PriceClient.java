@@ -31,6 +31,7 @@ public class PriceClient {
      *   service is down.
      */
     public String getPrice(Long vehicleId) {
+    	System.out.println("price of the vehicle method");
         try {
             Price price = client
                     .get()

@@ -32,6 +32,7 @@ public class MapsClient {
      *   or an exception message noting the Maps service is down
      */
     public Location getAddress(Location location) {
+    	System.out.println("the location of the vehicle is"+location.getLat()+location.getLon());
         try {
             Address address = client
                     .get()
